@@ -1,0 +1,8 @@
+<clickhouse>
+    <macros>
+        <cluster>my_cluster</cluster>
+        <shard>2</shard>
+        <replica>replica_1</replica>
+    </macros>
+</clickhouse>
+

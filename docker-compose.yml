@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  keeper-01:
+    image: clickhouse/clickhouse-server:latest
+    hostname: keeper-01
+    environment:
+      - KEEPER_ID=1
+    volumes:
+      - ./config/keeper/keeper_config.xml:/etc/clickhouse-server/keeper_config.xml
+    command: ["clickhouse-keeper", "--config-file=/etc/clickhouse-server/keeper_config.xml"]
+
+  keeper-02:
+    image: clickhouse/clickhouse-server:latest
+    hostname: keeper-02
+    environment:
+      - KEEPER_ID=2
+    volumes:
+      - ./config/keeper/keeper_config.xml:/etc/clickhouse-server/keeper_config.xml
+    command: ["clickhouse-keeper", "--config-file=/etc/clickhouse-server/keeper_config.xml"]
+
+  keeper-03:
+    image: clickhouse/clickhouse-server:latest
+    hostname: keeper-03
+    environment:
+      - KEEPER_ID=3
+    volumes:
+      - ./config/keeper/keeper_config.xml:/etc/clickhouse-server/keeper_config.xml
+    command: ["clickhouse-keeper", "--config-file=/etc/clickhouse-server/keeper_config.xml"]
+
+  clickhouse-01:
+    image: clickhouse/clickhouse-server:latest
+    hostname: clickhouse-01
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    volumes:
+      - ./config/clickhouse/remote_servers.xml:/etc/clickhouse-server/config.d/remote_servers.xml
+      - ./config/clickhouse/macros/macros_01.xml:/etc/clickhouse-server/config.d/macros.xml
+
+  clickhouse-02:
+    image: clickhouse/clickhouse-server:latest
+    hostname: clickhouse-02
+    volumes:
+      - ./config/clickhouse/remote_servers.xml:/etc/clickhouse-server/config.d/remote_servers.xml
+      - ./config/clickhouse/macros/macros_02.xml:/etc/clickhouse-server/config.d/macros.xml
+
+  clickhouse-03:
+    image: clickhouse/clickhouse-server:latest
+    hostname: clickhouse-03
+    volumes:
+      - ./config/clickhouse/remote_servers.xml:/etc/clickhouse-server/config.d/remote_servers.xml
+      - ./config/clickhouse/macros/macros_03.xml:/etc/clickhouse-server/config.d/macros.xml
+
+  clickhouse-04:
+    image: clickhouse/clickhouse-server:latest
+    hostname: clickhouse-04
+    volumes:
+      - ./config/clickhouse/remote_servers.xml:/etc/clickhouse-server/config.d/remote_servers.xml
+      - ./config/clickhouse/macros/macros_04.xml:/etc/clickhouse-server/config.d/macros.xml
+
+  clickhouse-05:
+    image: clickhouse/clickhouse-server:latest
+    hostname: clickhouse-05
+    volumes:
+      - ./config/clickhouse/remote_servers.xml:/etc/clickhouse-server/config.d/remote_servers.xml
+      - ./config/clickhouse/macros/macros_05.xml:/etc/clickhouse-server/config.d/macros.xml
+
+  clickhouse-06:
+    image: clickhouse/clickhouse-server:latest
+    hostname: clickhouse-06
+    volumes:
+      - ./config/clickhouse/remote_servers.xml:/etc/clickhouse-server/config.d/remote_servers.xml
+      - ./config/clickhouse/macros/macros_06.xml:/etc/clickhouse-server/config.d/macros.xml
